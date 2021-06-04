@@ -18,12 +18,12 @@ let cards = null;
 
 const startGame = () => {
     let cards = createCards(techs);
-    embaralha(cards);
+    shuffle(cards);
     console.log(cards);
 };
 
 
-const embaralha = (cards) => {
+const shuffle = (cards) => {
     let index = cards.length;
     let randomIndex = 0;
     
@@ -39,28 +39,28 @@ const createCards = (techs) => {
     let cards = []; //array vazio que recebe todas as Cards
     
     for (let tech of techs) {
-        cards.push(criaPar(tech)); //pega cada elemento e gera o seu par
+        cards.push(createPair(tech)); //pega cada elemento e gera o seu par
     }
     
     return cards.flatMap((pair) => pair); //separa os elementos no array
 };
 
-const criaPar = (tech) => {
+const createPair = (tech) => {
     return [
         {
-            id: geraId(tech),
+            id: createId(tech),
             icon: tech,
             flipped: false,
         },
         {
-            id: geraId(tech),
+            id: createId(tech),
             icon: tech,
             flipped: false,
         },
     ];
 };
 
-const geraId = (tech) => {
+const createId = (tech) => {
     return tech + parseInt(Math.random() * 1000);
 };
 
