@@ -16,13 +16,13 @@ let techs = [
 
 const criaCartas = (techs) => {
     
-    let cards=[];
+    let cards=[];//array vazio que recebe todas as cartas
 
-    for (let tech of techs){
-        cards.push(criaPar(tech));
+    for (let tech of techs){ 
+        cards.push(criaPar(tech));  //pega cada elemento e gera o seu par
     }
 
-    console.log(cards);
+    console.log(cards.flatMap(pair => pair)); //separa os elementos no array
 }
 
 const criaPar = (tech) =>{
