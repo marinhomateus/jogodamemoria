@@ -12,6 +12,8 @@ body{
     width: 120px;
     height: 120px;
     position: relative;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: transform .5s;
     transform-style: preserve-3d;
     transition: transform .5s;
 }
@@ -25,6 +27,7 @@ body{
     align-items: center;
     border-radius: 10px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.35);
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
 
@@ -47,17 +50,31 @@ body{
 
 #gameOver{
     position: absolute;
-    background-color: #6d6875;
-    justify-content: center;
-    text-align: center;
     width: 100%;
     height: 100%;
+    background-color: #6d6875;
     color: white;
-    display: flex;
+    font-size: 50px;
+    display: none;
+    justify-content: center;
+    text-align: center;
     flex-direction: column;
-    font-size: 2rem;
+    top: 0;
+
 }
 
 #restart{
     padding: 20px;
+    font-size: 20px;
+    background-color: #89BD9E;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameBoard{
+    background-color: aqua;
+    
 }
