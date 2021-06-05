@@ -1,10 +1,10 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Yusei Magic';
     display: flex;
     justify-content: center;
@@ -12,7 +12,7 @@ body{
     height: 100vh;
 }
 
-.card{
+.card {
     width: 120px;
     height: 120px;
     position: relative;
@@ -22,7 +22,8 @@ body{
     transition: transform .5s;
 }
 
-.card_back, .card_front{
+.card_back,
+.card_front {
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,24 +36,24 @@ body{
     backface-visibility: hidden;
 }
 
-.flip{
+.flip {
     transform: rotateY(180deg);
 }
 
-.icon{
+.icon {
     width: 100%;
 }
 
-.card_front{
+.card_front {
     background-color: #89BD9E;
     transform: rotateY(180deg);
 }
 
-.card_back{
+.card_back {
     background-color: #F0C987;
 }
 
-#gameOver{
+#gameOver {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -67,7 +68,7 @@ body{
 
 }
 
-#restart{
+#restart {
     padding: 20px;
     font-size: 20px;
     background-color: #89BD9E;
@@ -78,7 +79,7 @@ body{
     margin-right: auto;
 }
 
-#gameBoard{
+#gameBoard {
     max-width: 700px;
     display: grid;
     grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
