@@ -1,56 +1,45 @@
-const FRONT = "card_front";
-const BACK = "card_back";
-const CARD = "card";
-const ICON = "icon";
+const FRONT = "card_front"
+const BACK = "card_back"
+const CARD = "card"
+const ICON = "icon"
 
-let techs = [
-    "bootstrap",
-    "css",
-    "electron",
-    "firebase",
-    "html",
-    "javascript",
-    "jquery",
-    "mongo",
-    "node",
-    "react",
-];
+startGame();
 
-let cards = null;
+function startGame() {
+    initializeCards(game.createCardsFromTechs());
+}
 
-const startGame = () => {
-    let cards = createCards(techs);
-    shuffle(cards);
-
-    initializeCards(cards);
-};
-
-const initializeCards = (cards) => {
+function initializeCards(cards) {
     let gameBoard = document.getElementById("gameBoard");
+    gameBoard.innerHTML = '';
+    game.cards.forEach(card => {
 
-    cards.forEach((card) => {
-        let cardElement = document.createElement("div");
+        let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add(CARD);
         cardElement.dataset.icon = card.icon;
 
         createCardContent(card, cardElement);
 
-        cardElement.addEventListener("click", flipCard);
+        cardElement.addEventListener('click', flipCard)
         gameBoard.appendChild(cardElement);
-    });
-};
+    })
+}
 
-const createCardContent = (card, element) => {
-    createCardFace(FRONT, card, element);
-    createCardFace(BACK, card, element);
-};
+function createCardContent(card, cardElement) {
 
-const createCardFace = (face, card, element) => {
-    let cardElementFace = document.createElement("div");
+    createCardFace(FRONT, card, cardElement);
+    createCardFace(BACK, card, cardElement);
+
+
+}
+
+function createCardFace(face, card, element) {
+
+    let cardElementFace = document.createElement('div');
     cardElementFace.classList.add(face);
     if (face === FRONT) {
-        let iconElement = document.createElement("img");
+        let iconElement = document.createElement('img');
         iconElement.classList.add(ICON);
         iconElement.src = "./assets/images/" + card.icon + ".png";
         cardElementFace.appendChild(iconElement);
@@ -61,51 +50,40 @@ const createCardFace = (face, card, element) => {
         cardElementFace.appendChild(iconElement);
     }
     element.appendChild(cardElementFace);
-};
+}
 
-const shuffle = (cards) => {
-    let index = cards.length;
-    let randomIndex = 0;
 
-    while (index !== 0) {
-        randomIndex = Math.floor(Math.random() * index);
-        index--;
+function flipCard() {
 
-        [cards[randomIndex], cards[index]] = [cards[index], cards[randomIndex]];
+    if (game.setCard(this.id)) {
+
+        this.classList.add("flip");
+        if (game.secondCard) {
+            if (game.checkMatch()) {
+                game.clearCards();
+                if (game.checkGameOver()) {
+                    let gameOverLayer = document.getElementById("gameOver");
+                    gameOverLayer.style.display = 'flex';
+                }
+            } else {
+                setTimeout(() => {
+                    let firstCardView = document.getElementById(game.firstCard.id);
+                    let secondCardView = document.getElementById(game.secondCard.id);
+
+                    firstCardView.classList.remove('flip');
+                    secondCardView.classList.remove('flip');
+                    game.unflipCards();
+                }, 1000);
+
+            };
+        }
     }
-};
 
-const createCards = (techs) => {
-    let cards = []; //array vazio que recebe todas as Cards
+}
 
-    techs.forEach((tech) => {
-        cards.push(createPair(tech));
-    });
-
-    return cards.flatMap((pair) => pair); //separa os elementos no array
-};
-
-const createPair = (tech) => {
-    return [{
-            id: createId(tech),
-            icon: tech,
-            flipped: false,
-        },
-        {
-            id: createId(tech),
-            icon: tech,
-            flipped: false,
-        },
-    ];
-};
-
-const createId = (tech) => {
-    return tech + parseInt(Math.random() * 1000);
-};
-
-const flipCard = () => {
-    console.log(this);
-    //this.classList.add("flip");
-};
-
-startGame();
+function restart() {
+    game.clearCards();
+    startGame();
+    let gameOverLayer = document.getElementById("gameOver");
+    gameOverLayer.style.display = 'none';
+}
