@@ -1,3 +1,4 @@
+//importamos o que é referente ao game e deixamos no script a tela
 let game = {
 
     lockMode: false,
@@ -58,13 +59,8 @@ let game = {
     },
 
     checkGameOver() {
-
         return this.cards.filter(card => !card.flipped).length == 0;
     },
-
-
-
-
 
     createCardsFromTechs: function () {
 
