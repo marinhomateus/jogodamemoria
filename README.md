@@ -10,3 +10,4 @@ Foram utilizadas no projeto as seguintes tecnologias:
 - HTML
 - CSS
 - JavaScript
+***
